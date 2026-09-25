@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="ja" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <title>2126® — 100年後の世界 | The Century Shift Archive</title>
+  <meta name="description" content="100年後のテクノロジー、医療、都市、宇宙。むずかしい言葉を使わず、誰でも一目でわかる未来の記録。">
+
+  <!-- Google Fonts: Space Grotesk, Syne, Shippori Mincho, Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Shippori+Mincho:wght@400;700&family=Space+Grotesk:wght@300;400;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="is-loading">
+
+  <!-- 1. UNSEEN-INSPIRED INTRO LOADER -->
+  <div class="loader js-loader" id="loader">
+    <div class="loader__bg"></div>
+    <div class="loader__content">
+      <div class="loader__brand-tag">[ FUTURE ARCHIVE // 2026 ➔ 2126 ]</div>
+      <div class="loader__boxes-wrap">
+        <div class="loader__box-letter">2</div>
+        <div class="loader__box-letter">1</div>
+        <div class="loader__box-letter">2</div>
+        <div class="loader__box-letter">6</div>
+      </div>
+      <div class="loader__progress-bar-wrap">
+        <div class="loader__progress-bar" id="loaderProgressBar"></div>
+      </div>
+      <div class="loader__percent" id="loaderPercent">00%</div>
+      <p class="loader__tagline">
+        100年後の日常。<br>
+        テクノロジー、医療、宇宙、そして私たちの生き方。
+      </p>
+      <div class="loader__buttons">
+        <button class="btn btn--fill js-enter-sound" id="btnEnterSound">
+          <span class="btn__inner">
+            <span class="btn__text">音声ありで体験する</span>
+            <span class="btn__icon">🔊</span>
+          </span>
+        </button>
+        <button class="btn btn--ghost js-enter-no-sound" id="btnEnterNoSound">
+          <span class="btn__inner">
+            <span class="btn__text">音声なしで始める</span>
+            <span class="btn__icon">✕</span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. FLUID CUSTOM CURSOR (UNSEEN STUDIO ARCHITECTURE) -->
+  <div class="cursor js-cursor" id="customCursor">
+    <div class="cursor__wrap js-cursor-wrap">
+      <div class="cursor__inner">
+        <span class="cursor__circle js-cursor-circle"></span>
+        <div class="cursor__drag-badge js-cursor-drag">
+          <svg class="cursor__arrows" width="40" height="12" viewBox="0 0 40 12" fill="none">
+            <path d="M6 1L1 6L6 11M34 1L39 6L34 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="cursor__drag-text">DRAG</span>
+        </div>
+        <div class="cursor__video-badge js-cursor-video">
+          <svg class="cursor__video-ring" viewBox="0 0 44 44">
+            <circle cx="22" cy="22" r="20" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.3"/>
+            <circle class="cursor__video-progress" cx="22" cy="22" r="20" stroke="currentColor" stroke-width="2" fill="none"/>
+          </svg>
+          <svg class="cursor__play-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor">
+            <polygon points="5,3 13,8 5,13"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. WEBGL 3D INTERACTIVE CANVAS BACKGROUND -->
+  <div class="webgl-canvas-container">
+    <canvas id="gl"></canvas>
+  </div>
+
+  <!-- 4. FIXED EDITORIAL HEADER -->
+  <header class="header fixed" id="siteHeader">
+    <div class="header__left">
+      <a href="#hero" class="brand-logo" data-cursor="hover">
+        <span class="brand-logo__mark">2126®</span>
+        <span class="brand-logo__sub">100年後の世界</span>
+      </a>
+      <div class="header__clock-pill">
+        <span class="clock-indicator-dot"></span>
+        <span class="clock-display" id="futureClock">2126.09.25 11:26:00 JST</span>
+      </div>
+    </div>
+
+    <div class="header__right">
+      <nav class="header__nav d-none d-flex@md">
+        <a href="#timeline" class="nav-item" data-cursor="hover">
+          <span class="nav-item__text">01 年表</span>
+          <span class="nav-item__hover-text">01 Timeline</span>
+        </a>
+        <a href="#projects" class="nav-item" data-cursor="hover">
+          <span class="nav-item__text">02 分野別</span>
+          <span class="nav-item__hover-text">02 Topics</span>
+        </a>
+        <a href="#comparison" class="nav-item" data-cursor="hover">
+          <span class="nav-item__text">03 いま vs 100年後</span>
+          <span class="nav-item__hover-text">03 Now vs 2126</span>
+        </a>
+        <a href="#simulator" class="nav-item" data-cursor="hover">
+          <span class="nav-item__text">04 未来診断</span>
+          <span class="nav-item__hover-text">04 Simulator</span>
+        </a>
+      </nav>
+
+      <button class="btn btn--circle menu-btn js-menu-toggle" id="menuToggleBtn" data-cursor="hover" aria-label="メニューを開く">
+        <span class="menu-btn__icon">
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 5. UNSEEN FULLSCREEN EDITORIAL MENU DRAWER -->
+  <div class="menu-drawer js-menu-drawer" id="menuDrawer">
+    <div class="menu-drawer__inner">
+      <div class="menu-drawer__nav">
+        <a href="#hero" class="menu-item js-menu-link" data-cursor="hover">
+          <span class="menu-item__number">00</span>
+          <span class="menu-item__text">トップ / Introduction</span>
+          <span class="menu-item__serif">Overview</span>
+        </a>
+        <a href="#timeline" class="menu-item js-menu-link" data-cursor="hover">
+          <span class="menu-item__number">01</span>
+          <span class="menu-item__text">未来年表 / 100-Year Timeline</span>
+          <span class="menu-item__serif">Timeline</span>
+        </a>
+        <a href="#projects" class="menu-item js-menu-link" data-cursor="hover">
+          <span class="menu-item__number">02</span>
+          <span class="menu-item__text">主要トピック / Tech & Health</span>
+          <span class="menu-item__serif">Topics</span>
+        </a>
+        <a href="#comparison" class="menu-item js-menu-link" data-cursor="hover">
+          <span class="menu-item__number">03</span>
+          <span class="menu-item__text">いま vs 100年後 / 変化の比較</span>
+          <span class="menu-item__serif">Compare</span>
+        </a>
+        <a href="#simulator" class="menu-item js-menu-link" data-cursor="hover">
+          <span class="menu-item__number">04</span>
+          <span class="menu-item__text">100年後のあなた / 寿命と生活</span>
+          <span class="menu-item__serif">Simulator</span>
+        </a>
+      </div>
+
+      <div class="menu-drawer__footer">
+        <div class="menu-drawer__meta">
+          <span>ARCHIVE: 2126.EDITION</span>
+          <span>ALL METRICS SIMULATED</span>
+        </div>
+        <div class="menu-drawer__lang">
+          <span class="lang-tag is-active">日本語 (JA)</span>
+          <span class="lang-tag">ENGLISH (EN)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. MAIN CONTENT CONTAINER -->
+  <main class="main" id="mainContainer">
+
+    <!-- HERO SECTION -->
+    <section class="section hero" id="hero">
+      <div class="hero__container">
+        <div class="hero__badge reveal-el">
+          <span class="badge-dot"></span>
+          <span>[ 2026 ➔ 2126 : 100年後の地球と人類 ]</span>
+        </div>
+
+        <h1 class="hero__title reveal-el">
+          <span class="hero__title-row">100年後の</span>
+          <span class="hero__title-row hero__title-row--accent">「あたりまえ」。</span>
+        </h1>
+
+        <p class="hero__lead reveal-el">
+          むずかしい説明はいりません。<br>
+          100年後、病気は消え、画面はなくなり、宇宙へ行くのは週末の散歩になります。<br>
+          これが、次の世紀に訪れるシンプルな現実です。
+        </p>
+
+        <!-- LIVE FAST STATS TICKER -->
+        <div class="hero__stats-grid reveal-el">
+          <div class="stat-pill" data-cursor="hover">
+            <span class="stat-pill__num">150<span class="stat-pill__unit">歳</span></span>
+            <span class="stat-pill__label">平均寿命 (老化の治療化)</span>
+          </div>
+          <div class="stat-pill" data-cursor="hover">
+            <span class="stat-pill__num">0.00<span class="stat-pill__unit">秒</span></span>
+            <span class="stat-pill__label">思考伝達 (スマホ消滅)</span>
+          </div>
+          <div class="stat-pill" data-cursor="hover">
+            <span class="stat-pill__num">0<span class="stat-pill__unit">円</span></span>
+            <span class="stat-pill__label">電気・エネルギー代 (核融合)</span>
+          </div>
+          <div class="stat-pill" data-cursor="hover">
+            <span class="stat-pill__num">30<span class="stat-pill__unit">分</span></span>
+            <span class="stat-pill__label">地球の裏側までの移動時間</span>
+          </div>
+        </div>
+
+        <div class="hero__scroll-prompt">
+          <div class="scroll-mouse">
+            <span class="scroll-wheel"></span>
+          </div>
+          <span class="scroll-text">スクロールして未来を見る</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 1: 100-YEAR STEPPING TIMELINE (2026 -> 2126) -->
+    <section class="section timeline-section" id="timeline">
+      <div class="section__header">
+        <span class="section__subtitle">[ 01 / PROGRESSION ]</span>
+        <h2 class="section__title">100年で世界はどう変わる？</h2>
+        <p class="section__desc">100年後の今日に至るまでの、4つの大きなステップ。</p>
+      </div>
+
+      <div class="timeline__track" data-cursor="drag">
+        <!-- 2036 -->
+        <div class="timeline-card" data-cursor="hover">
+          <div class="timeline-card__year">2036</div>
+          <div class="timeline-card__tag">10年後</div>
+          <h3 class="timeline-card__title">スマホが消え始める</h3>
+          <p class="timeline-card__body">
+            メガネやコンタクトレンズが画面になり、歩きながら下を向く人はいなくなります。
+          </p>
+          <div class="timeline-card__highlight">画面は「持つ」から「視界に浮かぶ」へ</div>
+        </div>
+
+        <!-- 2056 -->
+        <div class="timeline-card" data-cursor="hover">
+          <div class="timeline-card__year">2056</div>
+          <div class="timeline-card__tag">30年後</div>
+          <h3 class="timeline-card__title">人工臓器とナノマシン</h3>
+          <p class="timeline-card__body">
+            ガンなどの重病は、注射一本のナノマシンが寝ている間に退治。寿命が100歳を超えます。
+          </p>
+          <div class="timeline-card__highlight">病気は「入院」から「寝て治す」へ</div>
+        </div>
+
+        <!-- 2086 -->
+        <div class="timeline-card" data-cursor="hover">
+          <div class="timeline-card__year">2086</div>
+          <div class="timeline-card__tag">60年後</div>
+          <h3 class="timeline-card__title">エネルギーが無料になる</h3>
+          <p class="timeline-card__body">
+            地上に小さな太陽（核融合）が完成。電気代やガソリン代という概念が世界から消滅します。
+          </p>
+          <div class="timeline-card__highlight">電気代は空気のように「タダ」へ</div>
+        </div>
+
+        <!-- 2126 -->
+        <div class="timeline-card timeline-card--future" data-cursor="hover">
+          <div class="timeline-card__year">2126</div>
+          <div class="timeline-card__tag timeline-card__tag--special">100年後（いま）</div>
+          <h3 class="timeline-card__title">意識と宇宙の完全解放</h3>
+          <p class="timeline-card__body">
+            平均寿命は150歳。月や火星で生まれ育つ子どもが普通になり、肉体労働はすべてロボットへ。
+          </p>
+          <div class="timeline-card__highlight">生きることは「労働」から「冒険と創作」へ</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: TOPICS WITH IRL B-ROLLS (UNSEEN STUDIO BENTO GRID) -->
+    <section class="section topics-section" id="projects">
+      <div class="section__header">
+        <div class="section__subtitle">[ 02 / PILLARS OF 2126 ]</div>
+        <h2 class="section__title">分野別にみる、100年後の生活</h2>
+        <p class="section__desc">画像をクリックすると、実写B-Roll映像と詳しいデータを全画面で確認できます。</p>
+        
+        <!-- FILTER BAR (UNSEEN STYLE) -->
+        <div class="filter-bar">
+          <button class="filter-btn is-active" data-filter="all" data-cursor="hover">
+            <span>すべて</span> <span class="filter-count">05</span>
+          </button>
+          <button class="filter-btn" data-filter="health" data-cursor="hover">
+            <span>医療・寿命</span> <span class="filter-count">01</span>
+          </button>
+          <button class="filter-btn" data-filter="tech" data-cursor="hover">
+            <span>テクノロジー</span> <span class="filter-count">01</span>
+          </button>
+          <button class="filter-btn" data-filter="energy" data-cursor="hover">
+            <span>エネルギー</span> <span class="filter-count">01</span>
+          </button>
+          <button class="filter-btn" data-filter="city" data-cursor="hover">
+            <span>都市・移動</span> <span class="filter-count">01</span>
+          </button>
+          <button class="filter-btn" data-filter="space" data-cursor="hover">
+            <span>宇宙開拓</span> <span class="filter-count">01</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- BENTO CARDS GRID -->
+      <div class="topics-grid" id="topicsGrid">
+
+        <!-- CARD 1: HEALTH & LONGEVITY -->
+        <article class="topic-card" data-category="health" data-cursor="video"
+          data-video="assets/videos/sample.mp4"
+          data-tag="01 // HEALTH & LONGEVITY"
+          data-title="「老化」は治る病気になり、寿命は150歳へ。"
+          data-lead="身体の衰えを昔の虫歯のように治せる時代。細胞を若返らせるカプセルが家庭に配られます。"
+          data-stat="150 歳"
+          data-stat-label="平均寿命"
+          data-fact-1="寝ている間に体内のナノマシンが傷ついた細胞を毎晩リセット。"
+          data-fact-2="臓器が悪くなったら、自分の細胞から3Dバイオ印刷して即日交換。"
+          data-fact-3="見た目年齢は30歳前後のまま、100歳以上の人生を元気に楽しむ。">
+          
+          <div class="topic-card__media">
+            <video class="topic-card__video" loop muted playsinline preload="metadata">
+              <source src="assets/videos/sample.mp4" type="video/mp4">
+            </video>
+            <div class="topic-card__overlay"></div>
+            <div class="topic-card__play-badge">
+              <span>▶ B-ROLL 映像</span>
+            </div>
+          </div>
+
+          <div class="topic-card__content">
+            <div class="topic-card__top">
+              <span class="topic-card__category">01 // 医療・寿命</span>
+              <span class="topic-card__badge">HEALTH</span>
+            </div>
+            <h3 class="topic-card__title">「老化」は治る病気になり、寿命は150歳へ。</h3>
+            <p class="topic-card__summary">
+              年をとって足腰や目が悪くなることは、薬やナノマシンで簡単に防げます。人は100歳を過ぎても、20代・30代と同じ元気さで過ごせます。
+            </p>
+            <div class="topic-card__stat-row">
+              <div class="topic-stat">
+                <span class="topic-stat__num">150<span class="topic-stat__unit">歳</span></span>
+                <span class="topic-stat__label">平均健康寿命</span>
+              </div>
+              <div class="topic-stat">
+                <span class="topic-stat__num">0<span class="topic-stat__unit">日</span></span>
+                <span class="topic-stat__label">入院待ち時間</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- CARD 2: TECHNOLOGY & AI -->
+        <article class="topic-card" data-category="tech" data-cursor="video"
+          data-video="assets/videos/robotics.mp4"
+          data-tag="02 // QUANTUM & ROBOTICS"
+          data-title="スマホは博物館へ。考えるだけで動く世界。"
+          data-lead="手で画面をタッチする時代は終わりました。頭で思い浮かべたことが、空間にそのまま現れます。"
+          data-stat="0.00 秒"
+          data-stat-label="思考伝達ラグ"
+          data-fact-1="脳波とAIが直接リンク。文字を打たなくても、思い浮かべた言葉が相手に伝わる。"
+          data-fact-2="つらい家事、危険な工事、重労働はすべて知的ロボットが担当。"
+          data-fact-3="人間は「働くため」ではなく「好きなことを学ぶ・遊ぶため」に生きる。">
+
+          <div class="topic-card__media">
+            <video class="topic-card__video" loop muted playsinline preload="metadata">
+              <source src="assets/videos/robotics.mp4" type="video/mp4">
+            </video>
+            <div class="topic-card__overlay"></div>
+            <div class="topic-card__play-badge">
+              <span>▶ B-ROLL 映像</span>
+            </div>
+          </div>
+
+          <div class="topic-card__content">
+            <div class="topic-card__top">
+              <span class="topic-card__category">02 // テクノロジー</span>
+              <span class="topic-card__badge">AI & ROBOTICS</span>
+            </div>
+            <h3 class="topic-card__title">スマホは博物館へ。考えるだけで動く世界。</h3>
+            <p class="topic-card__summary">
+              ポケットからスマホを取り出して画面を見る生活は過去の歴史。空気のようなAIが、あなたの考えを先回りしてあらゆる道具を動かします。
+            </p>
+            <div class="topic-card__stat-row">
+              <div class="topic-stat">
+                <span class="topic-stat__num">0.00<span class="topic-stat__unit">ms</span></span>
+                <span class="topic-stat__label">思考伝達速度</span>
+              </div>
+              <div class="topic-stat">
+                <span class="topic-stat__num">0<span class="topic-stat__unit">台</span></span>
+                <span class="topic-stat__label">手持ち端末数</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- CARD 3: ENERGY & FUSION -->
+        <article class="topic-card" data-category="energy" data-cursor="video"
+          data-video="assets/videos/energy.mp4"
+          data-tag="03 // CLEAN FUSION"
+          data-title="電気代はタダ。太陽を地上で作るエネルギー革命。"
+          data-lead="海水から無限のクリーンエネルギーを生み出す「人工太陽（核融合）」が世界中で稼働。"
+          data-stat="0 円"
+          data-stat-label="毎月の電気代"
+          data-fact-1="ゴミや汚染物質を一切出さない核融合で、地球温暖化は完全に解決。"
+          data-fact-2="エネルギーが無制限なので、砂漠の緑化や海水の真水化もコストゼロ。"
+          data-fact-3="貧困や資源の奪い合いによる戦争が、エネルギーの無料化で終結。">
+
+          <div class="topic-card__media">
+            <video class="topic-card__video" loop muted playsinline preload="metadata">
+              <source src="assets/videos/energy.mp4" type="video/mp4">
+            </video>
+            <div class="topic-card__overlay"></div>
+            <div class="topic-card__play-badge">
+              <span>▶ B-ROLL 映像</span>
+            </div>
+          </div>
+
+          <div class="topic-card__content">
+            <div class="topic-card__top">
+              <span class="topic-card__category">03 // エネルギー</span>
+              <span class="topic-card__badge">FUSION</span>
+            </div>
+            <h3 class="topic-card__title">電気代はタダ。太陽を地上で作るエネルギー革命。</h3>
+            <p class="topic-card__summary">
+              電気代を気にしてエアコンを消す時代は終わりました。海水に含まれる成分から無限の電力が作られ、地球上のすべての人に無償で届けられます。
+            </p>
+            <div class="topic-card__stat-row">
+              <div class="topic-stat">
+                <span class="topic-stat__num">100<span class="topic-stat__unit">%</span></span>
+                <span class="topic-stat__label">クリーン化率</span>
+              </div>
+              <div class="topic-stat">
+                <span class="topic-stat__num">¥0</span>
+                <span class="topic-stat__label">電気料金</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- CARD 4: CITY & MOBILITY -->
+        <article class="topic-card" data-category="city" data-cursor="video"
+          data-video="assets/videos/city.mp4"
+          data-tag="04 // HYPER CITY"
+          data-title="地球の裏側まで30分。満員電車はゼロに。"
+          data-lead="空中を飛ぶ自動カプセルと真空チューブ列車。信号待ちも渋滞もありません。"
+          data-stat="30 分"
+          data-stat-label="東京 ⇄ ロンドン"
+          data-fact-1="音速を超える地下チューブポッドで、日本からヨーロッパまで30分。"
+          data-fact-2="車はすべて空中と自動制御レーンを走行。交通事故の死亡率はゼロ。"
+          data-fact-3="街のビル全体が緑に覆われ、森の中で暮らしているような空気のきれいさ。">
+
+          <div class="topic-card__media">
+            <video class="topic-card__video" loop muted playsinline preload="metadata">
+              <source src="assets/videos/city.mp4" type="video/mp4">
+            </video>
+            <div class="topic-card__overlay"></div>
+            <div class="topic-card__play-badge">
+              <span>▶ B-ROLL 映像</span>
+            </div>
+          </div>
+
+          <div class="topic-card__content">
+            <div class="topic-card__top">
+              <span class="topic-card__category">04 // 都市・移動</span>
+              <span class="topic-card__badge">MOBILITY</span>
+            </div>
+            <h3 class="topic-card__title">地球の裏側まで30分。満員電車はゼロに。</h3>
+            <p class="topic-card__summary">
+              毎朝の満員電車でヘトヘトになる通勤は過去の話。どこへ行くにも呼べば数秒で静かなポッドが迎えに来て、目的地のドアまで空を飛んで送ってくれます。
+            </p>
+            <div class="topic-card__stat-row">
+              <div class="topic-stat">
+                <span class="topic-stat__num">0<span class="topic-stat__unit">件</span></span>
+                <span class="topic-stat__label">交通事故</span>
+              </div>
+              <div class="topic-stat">
+                <span class="topic-stat__num">30<span class="topic-stat__unit">分</span></span>
+                <span class="topic-stat__label">地球一周最速</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- CARD 5: SPACE & FRONTIER -->
+        <article class="topic-card" data-category="space" data-cursor="video"
+          data-video="assets/videos/space.mp4"
+          data-tag="05 // DEEP COSMOS"
+          data-title="月と火星は、ふつうの「週末旅行先」。"
+          data-lead="軌道エレベーターと宇宙定期便。地球を見下ろすホテルで朝食を食べる時代。"
+          data-stat="1/6 G"
+          data-stat-label="月面ホテル重力"
+          data-fact-1="高校や大学の卒業旅行で月面基地ホテルに泊まるのが定番化。"
+          data-fact-2="火星には常時数十万人が定住し、新しい街や学校が作られている。"
+          data-fact-3="宇宙エレベーターに乗れば、遊園地のアトラクション感覚で宇宙空間へ。">
+
+          <div class="topic-card__media">
+            <video class="topic-card__video" loop muted playsinline preload="metadata">
+              <source src="assets/videos/space.mp4" type="video/mp4">
+            </video>
+            <div class="topic-card__overlay"></div>
+            <div class="topic-card__play-badge">
+              <span>▶ B-ROLL 映像</span>
+            </div>
+          </div>
+
+          <div class="topic-card__content">
+            <div class="topic-card__top">
+              <span class="topic-card__category">05 // 宇宙開拓</span>
+              <span class="topic-card__badge">SPACE</span>
+            </div>
+            <h3 class="topic-card__title">月と火星は、ふつうの「週末旅行先」。</h3>
+            <p class="topic-card__summary">
+              宇宙は選ばれた宇宙飛行士だけのものではありません。家族で宇宙ステーションの展望レストランへ行き、青い地球を眺めながら食事を楽しめます。
+            </p>
+            <div class="topic-card__stat-row">
+              <div class="topic-stat">
+                <span class="topic-stat__num">3<span class="topic-stat__unit">時間</span></span>
+                <span class="topic-stat__label">地球 ⇄ 月面定期便</span>
+              </div>
+              <div class="topic-stat">
+                <span class="topic-stat__num">100<span class="topic-stat__unit">万人</span></span>
+                <span class="topic-stat__label">宇宙定住人口</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- SECTION 3: 2026 VS 2126 INTERACTIVE COMPARISON MATRIX -->
+    <section class="section comparison-section" id="comparison">
+      <div class="section__header">
+        <span class="section__subtitle">[ 03 / THEN & NOW ]</span>
+        <h2 class="section__title">いま（2026）と 100年後（2126）の差</h2>
+        <p class="section__desc">スライダーを動かして、生活がどう変わったかを直感的に比べてみましょう。</p>
+      </div>
+
+      <div class="comparison-matrix">
+        <!-- ROW 1 -->
+        <div class="matrix-row" data-cursor="hover">
+          <div class="matrix-card matrix-card--old">
+            <div class="matrix-card__year">2026（いま）</div>
+            <div class="matrix-card__icon">📱</div>
+            <h4 class="matrix-card__title">スマホを持ち歩く</h4>
+            <p class="matrix-card__desc">充電器を探し、画面を指でタップ。歩きスマホでぶつかりそうになる。</p>
+          </div>
+          <div class="matrix-arrow">➔</div>
+          <div class="matrix-card matrix-card--new">
+            <div class="matrix-card__year matrix-card__year--accent">2126（100年後）</div>
+            <div class="matrix-card__icon">🧠</div>
+            <h4 class="matrix-card__title">考えるだけで完結</h4>
+            <p class="matrix-card__desc">画面は存在しない。頭に浮かんだ映像や情報が空間にそのまま共有される。</p>
+          </div>
+        </div>
+
+        <!-- ROW 2 -->
+        <div class="matrix-row" data-cursor="hover">
+          <div class="matrix-card matrix-card--old">
+            <div class="matrix-card__year">2026（いま）</div>
+            <div class="matrix-card__icon">🏥</div>
+            <h4 class="matrix-card__title">病気になってから通院</h4>
+            <p class="matrix-card__desc">何時間も待合室で待ち、注射や痛い手術を受け、老化におびえる。</p>
+          </div>
+          <div class="matrix-arrow">➔</div>
+          <div class="matrix-card matrix-card--new">
+            <div class="matrix-card__year matrix-card__year--accent">2126（100年後）</div>
+            <div class="matrix-card__icon">🧬</div>
+            <h4 class="matrix-card__title">寝てる間にナノマシンが治す</h4>
+            <p class="matrix-card__desc">体内の微小ロボットがウイルスやガン細胞を即時分解。寿命は150歳へ。</p>
+          </div>
+        </div>
+
+        <!-- ROW 3 -->
+        <div class="matrix-row" data-cursor="hover">
+          <div class="matrix-card matrix-card--old">
+            <div class="matrix-card__year">2026（いま）</div>
+            <div class="matrix-card__icon">⚡</div>
+            <h4 class="matrix-card__title">電気代とガソリン代の請求</h4>
+            <p class="matrix-card__desc">毎月の光熱費を心配し、節電し、燃料代の高騰に悩まされる。</p>
+          </div>
+          <div class="matrix-arrow">➔</div>
+          <div class="matrix-card matrix-card--new">
+            <div class="matrix-card__year matrix-card__year--accent">2126（100年後）</div>
+            <div class="matrix-card__icon">☀️</div>
+            <h4 class="matrix-card__title">エネルギーは空気と同じ無料</h4>
+            <p class="matrix-card__desc">海水を使った人工太陽（核融合）が完成。世界中どこでも電力は0円。</p>
+          </div>
+        </div>
+
+        <!-- ROW 4 -->
+        <div class="matrix-row" data-cursor="hover">
+          <div class="matrix-card matrix-card--old">
+            <div class="matrix-card__year">2026（いま）</div>
+            <div class="matrix-card__icon">🚃</div>
+            <h4 class="matrix-card__title">満員電車で片道1時間の通勤</h4>
+            <p class="matrix-card__desc">生きるために毎日同じ時間に会社へ行き、疲れて帰宅する。</p>
+          </div>
+          <div class="matrix-arrow">➔</div>
+          <div class="matrix-card matrix-card--new">
+            <div class="matrix-card__year matrix-card__year--accent">2126（100年後）</div>
+            <div class="matrix-card__icon">🚀</div>
+            <h4 class="matrix-card__title">義務労働なし。空飛ぶポッドで移動</h4>
+            <p class="matrix-card__desc">つらい作業は知能ロボットへ。人は自分の好きなアートや研究を楽しむ。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: 100-YEAR AGE SIMULATOR (EASY INTERACTIVE WIDGET) -->
+    <section class="section simulator-section" id="simulator">
+      <div class="simulator-box" data-cursor="hover">
+        <div class="section__subtitle">[ 04 / INTERACTIVE SIMULATOR ]</div>
+        <h2 class="simulator-box__title">あなたの100年後をシミュレーション</h2>
+        <p class="simulator-box__lead">
+          いまの年齢を入力するだけで、2126年にあなたがどんな生活を送っているかがわかります。
+        </p>
+
+        <div class="simulator-form">
+          <label for="userAgeInput" class="simulator-label">あなたの今の年齢（歳）</label>
+          <div class="simulator-input-wrap">
+            <input type="number" id="userAgeInput" class="simulator-input" value="25" min="1" max="110">
+            <button class="btn btn--fill simulator-btn" id="simulateBtn" data-cursor="hover">
+              <span class="btn__inner">
+                <span class="btn__text">未来を診断する</span>
+                <span class="btn__icon">➔</span>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <div class="simulator-result" id="simulatorResult">
+          <div class="sim-result-header">
+            <div class="sim-badge">診断結果 // 2126年</div>
+            <div class="sim-ages">
+              <div class="sim-age-block">
+                <span class="sim-age-num" id="resFutureAge">125</span>
+                <span class="sim-age-unit">歳 (実年齢)</span>
+              </div>
+              <span class="sim-age-arrow">＝</span>
+              <div class="sim-age-block sim-age-block--accent">
+                <span class="sim-age-num" id="resBodyAge">28</span>
+                <span class="sim-age-unit">歳 (肉体見た目年齢)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="sim-schedule">
+            <h4 class="sim-schedule__title">2126年、あなたの1日スケジュール</h4>
+            <div class="sim-timeline">
+              <div class="sim-event">
+                <span class="sim-time">08:00</span>
+                <p class="sim-desc">ベッドのカプセルで起床。睡眠中にナノマシンが全身をフルメンテ済みで疲労ゼロ。</p>
+              </div>
+              <div class="sim-event">
+                <span class="sim-time">10:00</span>
+                <p class="sim-desc">分子プリンターが瞬時に作った好みの栄養朝食を食べる。食器洗いも全自動分解。</p>
+              </div>
+              <div class="sim-event">
+                <span class="sim-time">13:00</span>
+                <p class="sim-desc">火星ステーションに住む友人と、思考テレパシーでリアルタイム会話しながらゲーム。</p>
+              </div>
+              <div class="sim-event">
+                <span class="sim-time">18:00</span>
+                <p class="sim-desc">空飛ぶカプセルで高度2000mの空中庭園へ。電気代ゼロの美しい夜景を見ながらくつろぐ。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: FOOTER (UNSEEN STUDIO MINIMAL EDITORIAL) -->
+    <footer class="footer">
+      <div class="footer__inner">
+        <div class="footer__top">
+          <div class="footer__brand">
+            <span class="footer__logo">2126®</span>
+            <p class="footer__tagline">
+              100年後の日常を、シンプルに可視化する。<br>
+              Inspired by Unseen Studio design language.
+            </p>
+          </div>
+
+          <div class="footer__nav">
+            <div class="footer__col">
+              <span class="footer__col-title">INDEX</span>
+              <a href="#hero" class="footer__link" data-cursor="hover">トップ</a>
+              <a href="#timeline" class="footer__link" data-cursor="hover">未来年表</a>
+              <a href="#projects" class="footer__link" data-cursor="hover">主要トピック</a>
+            </div>
+            <div class="footer__col">
+              <span class="footer__col-title">EXPLORE</span>
+              <a href="#comparison" class="footer__link" data-cursor="hover">いま vs 100年後</a>
+              <a href="#simulator" class="footer__link" data-cursor="hover">100年後診断</a>
+              <a href="#siteHeader" class="footer__link" data-cursor="hover">ページ上部へ ↑</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer__bottom">
+          <div class="footer__cr">
+            <span>© 2026 - 2126 ARCHIVE. ALL RIGHTS RESERVED.</span>
+          </div>
+          <div class="footer__tech">
+            <span>THREE.JS WEBGL // NASA OPEN B-ROLL // WEB AUDIO SYNTH</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- 7. CINEMATIC B-ROLL MODAL (FULLSCREEN UNSEEN THEATRE) -->
+  <div class="video-modal js-video-modal" id="videoModal">
+    <div class="video-modal__backdrop js-close-modal"></div>
+    <div class="video-modal__container">
+      <button class="video-modal__close js-close-modal" data-cursor="hover" aria-label="閉じる">
+        ✕
+      </button>
+
+      <div class="video-modal__video-wrap">
+        <video class="video-modal__video" id="modalVideo" loop playsinline controls></video>
+      </div>
+
+      <div class="video-modal__info">
+        <div class="video-modal__tag" id="modalTag">01 // TOPIC</div>
+        <h3 class="video-modal__title" id="modalTitle">タイトル</h3>
+        <p class="video-modal__lead" id="modalLead">説明文</p>
+
+        <div class="video-modal__stat-box">
+          <span class="modal-stat-num" id="modalStatNum">150 歳</span>
+          <span class="modal-stat-label" id="modalStatLabel">平均寿命</span>
+        </div>
+
+        <div class="video-modal__facts">
+          <div class="modal-fact" id="modalFact1">• 事実1</div>
+          <div class="modal-fact" id="modalFact2">• 事実2</div>
+          <div class="modal-fact" id="modalFact3">• 事実3</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. FLOATING GLOBAL SOUND TOGGLE (UNSEEN STYLE) -->
+  <button class="btn btn--circle mute-btn js-mute-toggle" id="globalMuteBtn" data-cursor="hover" aria-label="サウンド切り替え">
+    <div class="mute-btn__rings">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <span class="mute-btn__icon" id="muteIcon">🔇</span>
+  </button>
+
+  <!-- SCRIPTS -->
+  <script src="assets/three.min.js"></script>
+  <script src="assets/lenis.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
