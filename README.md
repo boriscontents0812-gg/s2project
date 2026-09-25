@@ -39,7 +39,7 @@
 動画のストリーミングやシーク操作を最適に行うため、内蔵の軽量サーバーを起動します。
 
 ```bash
-node server.js
+node scripts/server.js
 ```
 ブラウザで [http://localhost:3000](http://localhost:3000) を開いてください。
 
@@ -54,7 +54,9 @@ node server.js
 ├── index.html              # セマンティックHTML・構造設計
 ├── style.css               # Unseen Studio風スタイル・アニメーション・レスポンシブ設計
 ├── main.js                 # Three.js WebGL, Web Audio, カスタムカーソル, モーダル, 診断ロジック
-├── server.js               # Rangeリクエスト対応の軽量Node.js開発サーバー
+├── vercel.json             # Vercel配信・ヘッダー設定
+├── scripts/
+│   └── server.js           # Rangeリクエスト対応の軽量Node.js開発サーバー
 └── assets/
     ├── three.min.js        # Three.js r128（完全オフライン対応）
     ├── lenis.min.js        # Lenis スムーススクロール
